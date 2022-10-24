@@ -1,4 +1,4 @@
-package com.pchpsky.diary.ui.theme
+package com.pchpsky.core.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

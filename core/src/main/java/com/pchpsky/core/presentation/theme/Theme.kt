@@ -1,4 +1,4 @@
-package com.pchpsky.diary.ui.theme
+package com.pchpsky.core.presentation.theme
 
 import android.app.Activity
 import android.os.Build

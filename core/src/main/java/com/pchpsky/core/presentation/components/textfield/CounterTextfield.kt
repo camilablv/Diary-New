@@ -9,6 +9,8 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
@@ -18,11 +20,16 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.pchpsky.core.presentation.theme.DiaryTheme
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun CounterTextField(units: MutableState<String>, setUnits: (String) -> Unit) {
+fun CounterTextField(
+    units: MutableState<String>,
+    setUnits: (String) -> Unit
+) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
@@ -31,7 +38,7 @@ fun CounterTextField(units: MutableState<String>, setUnits: (String) -> Unit) {
         onValueChange = { string ->
             units.value = string
         },
-//        textStyle = DiaryTheme.typography.insulinUnits,
+        textStyle = DiaryTheme.typography.insulinUnits,
         modifier = Modifier
             .width(250.dp)
             .height(IntrinsicSize.Min)
@@ -63,4 +70,16 @@ fun CounterTextField(units: MutableState<String>, setUnits: (String) -> Unit) {
             1.00f to Color.Transparent
         )
     )
+}
+
+@Composable
+@Preview
+fun CounterTextFieldPreview() {
+    DiaryTheme {
+        val units = remember {
+            mutableStateOf("1.0")
+        }
+
+        CounterTextField(units = units, setUnits = {})
+    }
 }

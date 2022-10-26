@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id("com.apollographql.apollo3").version("3.6.2")
 }
 
 android {
@@ -27,7 +28,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    apollo {
+        packageName.set("com.pchpsky")
+    }
 }
+
+
 
 dependencies {
 
@@ -38,11 +44,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
-    // Arrow
-    implementation "io.arrow-kt:arrow-core:$arrow_version"
-    implementation "io.arrow-kt:arrow-syntax:$arrow_version"
-
-    // Apollo
-    implementation "com.apollographql.apollo:apollo-runtime:$apollo_version"
-    implementation "com.apollographql.apollo:apollo-coroutines-support:$apollo_version"
+    implementation("com.apollographql.apollo3:apollo-runtime:3.6.2")
 }

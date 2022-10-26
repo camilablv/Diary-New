@@ -46,6 +46,7 @@ dependencies {
 
     implementation project(path: ':core')
     implementation project(path: ':network')
+    implementation project(path: ':schema')
 
     //Jetpack Compose
     implementation "androidx.activity:activity-compose:1.6.1"
@@ -70,6 +71,4 @@ dependencies {
 
     // Arrow
     implementation "io.arrow-kt:arrow-core:$arrow_version"
-    implementation "io.arrow-kt:arrow-syntax:$arrow_version"
-//    kapt "io.arrow-kt:arrow-meta:$arrow_version"
 }

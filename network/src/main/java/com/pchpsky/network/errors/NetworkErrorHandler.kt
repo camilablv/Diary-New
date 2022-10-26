@@ -1,6 +1,8 @@
 package com.pchpsky.network.errors
 
 import arrow.core.Either
+import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.exception.ApolloHttpException
 
 class NetworkErrorHandler {
 

@@ -45,6 +45,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation project(path: ':core')
+    implementation project(path: ':network')
 
     //Jetpack Compose
     implementation "androidx.activity:activity-compose:1.6.1"
@@ -66,4 +67,9 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.0.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    // Arrow
+    implementation "io.arrow-kt:arrow-core:$arrow_version"
+    implementation "io.arrow-kt:arrow-syntax:$arrow_version"
+//    kapt "io.arrow-kt:arrow-meta:$arrow_version"
 }

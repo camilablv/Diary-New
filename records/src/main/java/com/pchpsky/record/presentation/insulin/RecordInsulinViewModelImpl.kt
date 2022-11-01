@@ -3,6 +3,7 @@ package com.pchpsky.record.presentation.insulin
 import android.util.Log
 import com.pchpsky.core.domain.model.Insulin
 import com.pchpsky.record.domain.usecase.RecordInsulinUseCase
+import com.pchpsky.record.utils.insulins
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 

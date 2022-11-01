@@ -1,6 +1,8 @@
 package com.pchpsky.record.data.network
 
 import arrow.core.Either
+import com.apollographql.apollo3.ApolloClient
+import com.pchpsky.InsulinsQuery
 import com.pchpsky.network.errors.NetworkError
 import com.pchpsky.network.errors.NetworkErrorHandler
 
@@ -10,7 +12,7 @@ class NetworkClient(
 ) {
     suspend fun insulins(): Either<NetworkError, InsulinsQuery.Data> {
         return errorsHandler.withErrorHandler {
-            apolloClient.query(InsulinsQuery()).await()
+            return@withErrorHandler apolloClient.query(InsulinsQuery()).execute()
         }
     }
 }

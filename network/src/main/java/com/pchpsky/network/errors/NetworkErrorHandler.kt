@@ -1,12 +1,14 @@
 package com.pchpsky.network.errors
 
 import arrow.core.Either
-import com.apollographql.apollo.api.Response
-import com.apollographql.apollo.exception.ApolloHttpException
+import com.apollographql.apollo3.api.ApolloResponse
+import com.apollographql.apollo3.api.Error
+import com.apollographql.apollo3.api.Operation
+import com.apollographql.apollo3.exception.ApolloHttpException
 
 class NetworkErrorHandler {
 
-    suspend fun <T>withErrorHandler(request: suspend () -> Response<T>): Either<NetworkError, T> {
+    suspend fun <T: Operation.Data>withErrorHandler(request: suspend () -> ApolloResponse<T>): Either<NetworkError, T> {
         try {
             val response = request.invoke()
             if (response.errors != null) {
@@ -20,13 +22,12 @@ class NetworkErrorHandler {
     }
 
     private fun parse(error: Error): NetworkError {
-        val code = error.customAttributes["code"].toString().toInt()
-        return when (code) {
+        return when (error.nonStandardFields?.get("code")?.toString()?.toInt()) {
             422 -> {
-                var fields = error.customAttributes["fields"] as Map<String, ArrayList<String>>
-                fields = fields.entries.map {
+                var fields = error.nonStandardFields?.get("fields") as Map<String, ArrayList<String>>
+                fields = fields.entries.associate {
                     it.key to it.value
-                }.toMap()
+                }
                 NetworkError.ValidationError(fields)
             }
             401 -> { NetworkError.AuthenticationError(error.message) }

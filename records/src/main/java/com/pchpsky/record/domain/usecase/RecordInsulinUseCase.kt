@@ -1,21 +1,15 @@
 package com.pchpsky.record.domain.usecase
 
 import android.util.Log
+import arrow.core.Either
+import com.pchpsky.InsulinsQuery
+import com.pchpsky.network.errors.NetworkError
 import com.pchpsky.record.domain.repository.RecordInsulinRepository
 
 class RecordInsulinUseCase(
     private val repository: RecordInsulinRepository
 ) {
-    suspend fun insulins() {
-        repository.insulins().fold(
-            ifLeft = {
-                Log.d("debugInsulin", "returns left")
-            },
-            ifRight = {
-                Log.d("debugInsulin", "returns right")
-                val insulins = it.insulins()
-//                _uiState.value = _uiState.value.copy(insulins = insulins!!, selectedInsulin = insulins.first(), loading = false)
-            }
-        )
+    suspend fun insulins(): Either<NetworkError, InsulinsQuery.Data> {
+        return repository.insulins()
     }
 }

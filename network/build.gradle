@@ -42,6 +42,5 @@ dependencies {
     implementation "io.arrow-kt:arrow-core:$arrow_version"
 
     // Apollo
-    implementation "com.apollographql.apollo:apollo-runtime:$apollo_version"
-    implementation "com.apollographql.apollo:apollo-coroutines-support:$apollo_version"
+    implementation "com.apollographql.apollo3:apollo-runtime:$apollo_version"
 }

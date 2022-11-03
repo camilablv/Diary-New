@@ -62,4 +62,9 @@ dependencies {
     implementation "com.google.accompanist:accompanist-insets:0.10.0"
 
     debugImplementation "androidx.customview:customview-poolingcontainer:1.0.0"
+
+    // Koin
+    implementation "io.insert-koin:koin-android:$koin_android_version"
+    testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
+    implementation "io.insert-koin:koin-androidx-compose:$koin_android_compose_version"
 }

@@ -11,6 +11,7 @@ import org.koin.dsl.module
 val networkModule = module {
     single { provideApolloClient() }
     single { provideNetworkClient(get(), get()) }
+    factory { provideNetworkErrorHandler() }
 }
 
 fun provideApolloClient(): ApolloClient {
@@ -27,3 +28,5 @@ fun provideApolloClient(): ApolloClient {
 
 fun provideNetworkClient(apolloClient: ApolloClient, errorHandler: NetworkErrorHandler) =
     NetworkClient(apolloClient, errorHandler)
+
+fun provideNetworkErrorHandler() = NetworkErrorHandler()

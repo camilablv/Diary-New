@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.pchpsky.core.presentation.theme.DiaryTheme
+import com.pchpsky.record.presentation.insulin.RecordInsulinScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,9 +21,9 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = DiaryTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    RecordInsulinScreen()
                 }
             }
         }

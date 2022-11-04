@@ -1,6 +1,7 @@
 package com.pchpsky.record.presentation.insulin
 
 import android.util.Log
+import androidx.lifecycle.ViewModel
 import com.pchpsky.core.domain.model.Insulin
 import com.pchpsky.record.domain.usecase.RecordInsulinUseCase
 import com.pchpsky.record.utils.insulins
@@ -8,8 +9,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 class RecordInsulinViewModelImpl(
-    val useCase: RecordInsulinUseCase
-) : RecordInsulinViewModel {
+    private val useCase: RecordInsulinUseCase
+) : ViewModel(), RecordInsulinViewModel {
     private var _uiState = MutableStateFlow(RecordInsulinViewState())
     override val uiState: StateFlow<RecordInsulinViewState> = _uiState
 

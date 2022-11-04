@@ -23,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = DiaryTheme.colors.background
                 ) {
-                    RecordInsulinScreen()
+                    RecordInsulinScreen() {}
                 }
             }
         }

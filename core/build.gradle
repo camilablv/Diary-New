@@ -61,6 +61,10 @@ dependencies {
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.10.0"
     implementation "com.google.accompanist:accompanist-insets:0.10.0"
 
+    // Compose Dialogs
+    implementation "io.github.vanpra.compose-material-dialogs:color:0.6.2"
+    implementation "io.github.vanpra.compose-material-dialogs:datetime:0.6.2"
+
     debugImplementation "androidx.customview:customview-poolingcontainer:1.0.0"
 
     // Koin

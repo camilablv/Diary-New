@@ -27,10 +27,10 @@ class RecordInsulinViewModelImpl(
     }
 
     override fun setUnits(units: Double) {
-        val value = units
-        if (value == null) _uiState.value = _uiState.value.copy(unitsInputError = "Units value is invalid")
-        else if (value < 1.0 || value > 100.0) return
-        else _uiState.value = _uiState.value.copy(units = value, unitsInputError = "")
+        if (units == null) _uiState.value =
+            _uiState.value.copy(unitsInputError = "Units value is invalid")
+        else if (units < 1.0 || units > 100.0) return
+        else _uiState.value = _uiState.value.copy(units = units, unitsInputError = "")
     }
 
     override suspend fun insulins() {

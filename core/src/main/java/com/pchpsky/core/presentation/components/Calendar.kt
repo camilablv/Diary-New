@@ -7,11 +7,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pchpsky.core.presentation.theme.DiaryTheme
+import com.pchpsky.core.presentation.theme.green
+import com.pchpsky.core.presentation.theme.lightGreen
+import com.pchpsky.core.presentation.theme.lightGrey
 
 @Composable
 fun Calendar(day: String, month: String) {
@@ -27,7 +31,12 @@ fun Calendar(day: String, month: String) {
             )
 
             drawRect(
-                color = Color.Red,
+                brush = Brush.linearGradient(
+                    listOf(
+                        lightGreen,
+                        green
+                    )
+                ),
                 topLeft = Offset(0f, 0f),
                 size = size.copy(325f, 50f),
 

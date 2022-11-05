@@ -7,23 +7,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.*
-import androidx.compose.ui.graphics.drawscope.DrawStyle
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pchpsky.core.presentation.theme.DiaryTheme
 
 @Composable
-fun Calendar(text: String) {
-    val path = Path().apply {
-        moveTo(100f, 50f)
-        quadraticBezierTo(10f, 80f,
-            300f, 300f)
-        lineTo(50f, 10f)
-        quadraticBezierTo(90f, 80f, 0f, 0f)
-        close()
-    }
+fun Calendar(day: String, month: String) {
 
     Canvas(
         modifier = Modifier
@@ -34,18 +25,6 @@ fun Calendar(text: String) {
                 color = Color.Gray,
                 cornerRadius = CornerRadius(16f, 16f)
             )
-//            drawPath(
-//                path = path,
-//                color = Color.Red
-//            )
-//            drawArc(
-//                color = Color.Red,
-//                startAngle = 0f,
-//                sweepAngle = 50f,
-//                topLeft = Offset(50f, 200f),
-//                blendMode = BlendMode.ColorBurn,
-//                useCenter = true
-//            )
 
             drawRect(
                 color = Color.Red,
@@ -117,6 +96,6 @@ fun Calendar(text: String) {
 @Preview
 fun CalendarPreview() {
     DiaryTheme {
-        Calendar(text = "04 Груд.")
+        Calendar(day = "04", month = "Nov.")
     }
 }

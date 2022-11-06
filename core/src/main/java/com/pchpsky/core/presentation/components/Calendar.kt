@@ -26,7 +26,12 @@ fun Calendar(day: String, month: String) {
             .padding(16.dp),
         onDraw = {
             drawRoundRect(
-                color = Color.Gray,
+                brush = Brush.linearGradient(
+                    listOf(
+                        Color.Gray.copy(0.40f),
+                        Color.Gray
+                    )
+                ),
                 cornerRadius = CornerRadius(16f, 16f)
             )
 

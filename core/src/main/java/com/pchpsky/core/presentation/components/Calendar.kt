@@ -1,5 +1,7 @@
 package com.pchpsky.core.presentation.components
 
+import android.graphics.Paint
+import android.graphics.Typeface
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -10,6 +12,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pchpsky.core.presentation.theme.DiaryTheme
@@ -102,6 +107,21 @@ fun Calendar(day: String, month: String) {
                 strokeWidth = 16f,
                 cap = StrokeCap.Round
             )
+
+            val paint = Paint().apply {
+                textAlign = Paint.Align.CENTER
+                textSize = 72f
+                color = 0xffffffffff.toInt()
+                typeface = Typeface.DEFAULT_BOLD
+            }
+
+            drawIntoCanvas {
+                it.nativeCanvas.drawText("March", center.x, center.y, paint)
+            }
+
+            drawIntoCanvas {
+                it.nativeCanvas.drawText("24", center.x, center.y + 72f, paint)
+            }
         }
     )
 }

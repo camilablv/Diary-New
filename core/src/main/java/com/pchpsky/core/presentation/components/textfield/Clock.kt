@@ -16,9 +16,13 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pchpsky.core.presentation.theme.DiaryTheme
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
 
 @Composable
 fun Clock(
@@ -62,6 +66,35 @@ fun Clock(
                 ),
                 radius = circleRadius
             )
+
+            val lineLength = circleRadius * 0.15f
+
+            for (i in 0 until 12) {
+                val angleInDegrees = i * 360f / 12
+                val angleInRadius = angleInDegrees * PI/180f + PI/2f
+
+                val start = Offset(
+                    x = (circleRadius * cos(angleInRadius) + circleCenter.value.x).toFloat(),
+                    y = (circleRadius * sin(angleInRadius) + circleCenter.value.y).toFloat()
+                )
+
+                val end = Offset(
+                    x = (circleRadius * cos(angleInRadius) + circleCenter.value.x).toFloat(),
+                    y = (circleRadius * sin(angleInRadius) + lineLength + circleCenter.value.y).toFloat()
+                )
+
+                rotate(
+                    angleInDegrees + 180,
+                    pivot = start
+                ) {
+                    drawLine(
+                        color = Color.Black,
+                        start = start,
+                        end = end,
+                        strokeWidth = 12f
+                    )
+                }
+            }
         }
     }
 }

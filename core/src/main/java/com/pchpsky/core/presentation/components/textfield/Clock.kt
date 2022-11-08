@@ -1,5 +1,7 @@
 package com.pchpsky.core.presentation.components.textfield
 
+import android.graphics.Paint
+import android.graphics.Typeface
 import androidx.compose.compiler.plugins.kotlin.ComposeFqNames.remember
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -15,8 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pchpsky.core.presentation.theme.DiaryTheme
@@ -89,12 +94,24 @@ fun Clock(
                     pivot = start
                 ) {
                     drawLine(
-                        color = Color.Black,
+                        color = Color.Gray,
                         start = start,
                         end = end,
-                        strokeWidth = 12f
+                        strokeWidth = 12f,
+                        cap = StrokeCap.Round
                     )
                 }
+            }
+
+            val paint = Paint().apply {
+                textAlign = Paint.Align.CENTER
+                textSize = 220f
+                color = 0xff00000f.toInt()
+                typeface = Typeface.DEFAULT_BOLD
+            }
+
+            drawIntoCanvas {
+                it.nativeCanvas.drawText("04:45", circleCenter.value.x, circleCenter.value.y + 70f, paint)
             }
         }
     }

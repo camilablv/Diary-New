@@ -73,7 +73,7 @@ fun Calendar(
 
             val paint = Paint().apply {
                 textAlign = Paint.Align.CENTER
-                textSize = 72f
+                textSize = sizeInPx/3
                 color = 0xffffffffff.toInt()
                 typeface = Typeface.DEFAULT_BOLD
             }
@@ -83,7 +83,7 @@ fun Calendar(
             }
 
             drawIntoCanvas {
-                it.nativeCanvas.drawText(date.month, center.x, center.y + 72f, paint)
+                it.nativeCanvas.drawText(date.month, center.x, center.y + sizeInPx/3, paint)
             }
         }
     )
@@ -104,7 +104,7 @@ fun CalendarPreview() {
                     .align(Alignment.Center)
                     .padding(16.dp),
                 date = date,
-                size = 100.dp
+                size = 250.dp
             )
         }
     }

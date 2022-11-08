@@ -16,6 +16,8 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.DrawStyle
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,11 +44,12 @@ fun Calendar(
             drawRoundRect(
                 brush = Brush.linearGradient(
                     listOf(
-                        Color.Gray.copy(0.40f),
-                        Color.Gray
+                        Color.Gray,
+                        Color.Gray.copy(0.40f)
                     )
                 ),
-                cornerRadius = CornerRadius(16f, 16f)
+                cornerRadius = CornerRadius(sizeInPx/48, sizeInPx/48),
+                size = Size(sizeInPx, sizeInPx)
             )
 
             drawRect(
@@ -61,11 +64,11 @@ fun Calendar(
 
             )
 
-            for (i in sizeInPx.toInt()/7 until sizeInPx.toInt() step sizeInPx.toInt()/7) {
+            for (position in sizeInPx.toInt()/14 until sizeInPx.toInt() step sizeInPx.toInt()/7) {
                 drawLine(
                     color = Color.Black,
-                    start = Offset(i.toFloat(), 0f),
-                    end = Offset(i.toFloat(), sizeInPx/23),
+                    start = Offset(position.toFloat(), 0f),
+                    end = Offset(position.toFloat(), sizeInPx/23),
                     strokeWidth = size.toPx()/20,
                     cap = StrokeCap.Round
                 )

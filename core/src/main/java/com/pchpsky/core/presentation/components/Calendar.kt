@@ -18,13 +18,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.pchpsky.core.presentation.theme.DiaryTheme
 import com.pchpsky.core.presentation.theme.green
 import com.pchpsky.core.presentation.theme.lightGreen
-import com.pchpsky.core.presentation.theme.lightGrey
 
 data class Date(val dayOfMonth: String, val month: String)
 
@@ -32,14 +31,14 @@ data class Date(val dayOfMonth: String, val month: String)
 fun Calendar(
     modifier: Modifier,
     date: Date,
-    size: Size
+    size: Dp
 ) {
-
     Canvas(
-        modifier = Modifier
-            .size(150.dp)
-            .padding(16.dp),
+        modifier = modifier
+            .size(size),
         onDraw = {
+            val sizeInPx = size.toPx()
+
             drawRoundRect(
                 brush = Brush.linearGradient(
                     listOf(
@@ -58,16 +57,16 @@ fun Calendar(
                     )
                 ),
                 topLeft = Offset(0f, 0f),
-                size = size.copy(325f, 50f),
+                size = Size(sizeInPx, sizeInPx/6),
 
             )
 
-            for (i in 40 until 320 step 40) {
+            for (i in sizeInPx.toInt()/7 until sizeInPx.toInt() step sizeInPx.toInt()/7) {
                 drawLine(
                     color = Color.Black,
                     start = Offset(i.toFloat(), 0f),
-                    end = Offset(i.toFloat(), 15f),
-                    strokeWidth = 16f,
+                    end = Offset(i.toFloat(), sizeInPx/23),
+                    strokeWidth = size.toPx()/20,
                     cap = StrokeCap.Round
                 )
             }
@@ -105,7 +104,7 @@ fun CalendarPreview() {
                     .align(Alignment.Center)
                     .padding(16.dp),
                 date = date,
-                size = Size(320f, 320f)
+                size = 100.dp
             )
         }
     }

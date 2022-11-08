@@ -37,6 +37,10 @@ fun RecordInsulinScreen(
         mutableStateOf(viewState.units.toString())
     }
 
+    LaunchedEffect(true) {
+        viewModel.insulins()
+    }
+
     Scaffold(
         modifier = Modifier
 
@@ -56,7 +60,7 @@ fun RecordInsulinScreen(
                 Counter(
                     modifier = Modifier,
                     value = units,
-                    onValueChanged = {}
+                    onValueChanged = { viewModel.setUnits(it.toDouble()) }
                 )
             }
 
@@ -65,16 +69,16 @@ fun RecordInsulinScreen(
                     modifier = Modifier
                         .wrapContentSize()
                         .padding(32.dp),
-                    horizontalArrangement = Arrangement.spacedBy(24.dp)
+                    horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Calendar(
                         modifier = Modifier,
                         date = Date("08", "Nov"),
-                        size = 150.dp)
+                        size = 128.dp)
                     Clock(
                         modifier = Modifier,
                         time = viewState.time,
-                        circleRadius = 200f,
+                        circleRadius = 150f,
                         outerCircleThickness = 50f
                     )
                 }

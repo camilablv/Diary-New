@@ -52,8 +52,8 @@ fun Clock(
                 style = Stroke(width = outerCircleThickness),
                 brush = Brush.linearGradient(
                     listOf(
-                        pink.copy(0.08f),
-                        pink
+                        pink,
+                        pink.copy(0.55f)
                     )
                 ),
                 radius = circleRadius + outerCircleThickness/2f,
@@ -103,13 +103,13 @@ fun Clock(
 
             val paint = Paint().apply {
                 textAlign = Paint.Align.CENTER
-                textSize = 220f
+                textSize = circleRadius / 1.6f
                 color = 0xff00000f.toInt()
                 typeface = Typeface.DEFAULT_BOLD
             }
 
             drawIntoCanvas {
-                it.nativeCanvas.drawText(time, circleCenter.value.x, circleCenter.value.y + 70f, paint)
+                it.nativeCanvas.drawText(time, circleCenter.value.x, circleCenter.value.y + 48f, paint)
             }
         }
     }

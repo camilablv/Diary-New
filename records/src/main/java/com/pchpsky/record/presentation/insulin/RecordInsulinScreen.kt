@@ -15,7 +15,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pchpsky.core.presentation.components.Calendar
 import com.pchpsky.core.presentation.components.Counter
-import com.pchpsky.core.presentation.components.textfield.Clock
+import com.pchpsky.core.presentation.components.Date
+import com.pchpsky.core.presentation.components.Clock
 import com.pchpsky.core.presentation.theme.DiaryTheme
 import org.koin.androidx.compose.getViewModel
 
@@ -66,11 +67,18 @@ fun RecordInsulinScreen(
                         .padding(32.dp),
                     horizontalArrangement = Arrangement.spacedBy(24.dp)
                 ) {
-                    Calendar(text = "04 Nov")
-                    Clock(text = "15:35")
+                    Calendar(
+                        modifier = Modifier,
+                        date = Date("08", "Nov"),
+                        size = 150.dp)
+                    Clock(
+                        modifier = Modifier,
+                        time = viewState.time,
+                        circleRadius = 200f,
+                        outerCircleThickness = 50f
+                    )
                 }
             }
-
         }
     }
 }

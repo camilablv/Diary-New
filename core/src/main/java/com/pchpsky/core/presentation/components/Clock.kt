@@ -1,13 +1,11 @@
-package com.pchpsky.core.presentation.components.textfield
+package com.pchpsky.core.presentation.components
 
 import android.graphics.Paint
 import android.graphics.Typeface
-import androidx.compose.compiler.plugins.kotlin.ComposeFqNames.remember
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -33,7 +31,7 @@ import kotlin.math.sin
 @Composable
 fun Clock(
     modifier: Modifier,
-    time: () -> Long,
+    time: String,
     circleRadius: Float,
     outerCircleThickness: Float
 ) {
@@ -50,7 +48,6 @@ fun Clock(
             val width = size.width
             val height = size.height
             circleCenter.value = Offset(x = width/2f, y = height/2f)
-
             drawCircle(
                 style = Stroke(width = outerCircleThickness),
                 brush = Brush.linearGradient(
@@ -64,16 +61,17 @@ fun Clock(
             )
 
             drawCircle(
-                brush = Brush.radialGradient(
+                brush = Brush.linearGradient(
                     listOf(
                         Color(0xFFF3F3F3).copy(0.45f),
                         Color(0xFF3F3F3F).copy(0.25f)
                     )
                 ),
-                radius = circleRadius
+                radius = circleRadius,
+                center = circleCenter.value
             )
 
-            val lineLength = circleRadius * 0.15f
+            val lineLength = circleRadius * 0.10f
 
             for (i in 0 until 12) {
                 val angleInDegrees = i * 360f / 12
@@ -111,7 +109,7 @@ fun Clock(
             }
 
             drawIntoCanvas {
-                it.nativeCanvas.drawText("04:45", circleCenter.value.x, circleCenter.value.y + 70f, paint)
+                it.nativeCanvas.drawText(time, circleCenter.value.x, circleCenter.value.y + 70f, paint)
             }
         }
     }
@@ -129,9 +127,7 @@ fun ClockPreview() {
             Clock(
                 modifier = Modifier
                     .size(500.dp),
-                time = {
-                       System.currentTimeMillis()
-                },
+                time = "16:15",
                 circleRadius = 400f,
                 outerCircleThickness = 50f
             )

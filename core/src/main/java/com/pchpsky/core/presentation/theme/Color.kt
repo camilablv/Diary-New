@@ -12,8 +12,8 @@ val lightGrey = Color(0xffa1a1aa)
 val errorRed = Color(0xffb71c1c)
 val yellow = Color(0xffffff00)
 val cardBackground = Color(0xff333333)
-val pink = Color(0xff841111)
 val orange = Color(0xffe65100)
+val pink = Color(0xffd926a9)
 
 val DarkColors = DiaryColors(
     logo = Color.White,

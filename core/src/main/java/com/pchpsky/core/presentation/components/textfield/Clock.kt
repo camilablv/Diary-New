@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pchpsky.core.presentation.theme.DiaryTheme
+import com.pchpsky.core.presentation.theme.pink
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -49,8 +50,8 @@ fun Clock(
                 style = Stroke(width = outerCircleThickness),
                 brush = Brush.linearGradient(
                     listOf(
-                        Color(0xFFF3F3F3).copy(0.45f),
-                        Color(0xFF3F3F3F).copy(0.35f)
+                        pink.copy(0.08f),
+                        pink
                     )
                 ),
                 radius = circleRadius + outerCircleThickness/2f,

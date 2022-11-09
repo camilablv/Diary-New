@@ -25,6 +25,7 @@ import com.pchpsky.core.presentation.components.ErrorMessage
 import com.pchpsky.core.presentation.components.RoundedFilledButton
 import com.pchpsky.core.presentation.theme.DiaryTheme
 import com.pchpsky.core.presentation.components.textfield.OutlinedTextField
+import com.pchpsky.core.presentation.theme.green
 import kotlinx.coroutines.launch
 
 @SuppressLint("CoroutineCreationDuringComposition", "UnusedMaterialScaffoldPaddingParameter")
@@ -41,7 +42,7 @@ fun LoginScreen(viewModel: LoginViewModel) {
 
     if (uiState is AuthState.SignupSuccessful) {
         val context = LocalContext.current
-        openHomeScreen(context)
+//        openHomeScreen(context)
     }
 
     Scaffold(
@@ -58,7 +59,7 @@ fun LoginScreen(viewModel: LoginViewModel) {
             val (column, button, signInTitle) = createRefs()
 
             Text(
-                text = stringResource(R.string.sign_in),
+                text = "Sign In",
                 style = DiaryTheme.typography.authScreenHeader,
                 modifier = Modifier.constrainAs(signInTitle) {
                     top.linkTo(parent.top, 40.dp)
@@ -84,7 +85,7 @@ fun LoginScreen(viewModel: LoginViewModel) {
             }
 
             RoundedFilledButton(
-                stringResource(R.string.login),
+                "Login",
                 modifier = Modifier
                     .constrainAs(button) {
                         start.linkTo(parent.start, 40.dp)
@@ -115,7 +116,7 @@ fun LoginScreen(viewModel: LoginViewModel) {
 fun LoginTextField(login: MutableState<String>, errorMessage: String?) {
     OutlinedTextField(
         login,
-        stringResource(R.string.login),
+        "Login",
         errorMessage,
         KeyboardType.Email,
         VisualTransformation.None
@@ -129,7 +130,7 @@ fun LoginTextField(login: MutableState<String>, errorMessage: String?) {
 fun LoginPasswordTextField(password: MutableState<String>, errorMessage: String?) {
     OutlinedTextField(
         password,
-        stringResource(R.string.password),
+        "Password",
         errorMessage,
         KeyboardType.Password,
         PasswordVisualTransformation()
@@ -141,6 +142,6 @@ fun LoginPasswordTextField(password: MutableState<String>, errorMessage: String?
 @Preview
 fun LoginPreview() {
     DiaryTheme(darkTheme = true) {
-        LoginScreen(FakeAuthViewModel)
+//        LoginScreen(FakeAuthViewModel)
     }
 }

@@ -1,4 +1,4 @@
-package com.pchpsky.auth.domain.usecase.repository
+package com.pchpsky.auth.domain.repository
 
 import arrow.core.Either
 import com.pchpsky.CreateSessionMutation

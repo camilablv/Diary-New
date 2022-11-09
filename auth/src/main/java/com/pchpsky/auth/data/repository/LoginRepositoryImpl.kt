@@ -3,7 +3,7 @@ package com.pchpsky.auth.data.repository
 import arrow.core.Either
 import com.pchpsky.CreateSessionMutation
 import com.pchpsky.auth.data.network.AuthNetworkClient
-import com.pchpsky.auth.domain.usecase.repository.LoginRepository
+import com.pchpsky.auth.domain.repository.LoginRepository
 import com.pchpsky.network.errors.NetworkError
 import com.pchpsky.network.token.TokenStore
 

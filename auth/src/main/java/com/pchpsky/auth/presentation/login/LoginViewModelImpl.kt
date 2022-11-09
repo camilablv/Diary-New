@@ -9,24 +9,21 @@ import kotlinx.coroutines.flow.StateFlow
 
 class LoginViewModelImpl(val useCase: LoginUseCase) : ViewModel(), LoginViewModel {
 
-    private val _uiState: MutableStateFlow<AuthState> = MutableStateFlow(AuthState.None)
+    private val _uiState: MutableStateFlow<LoginViewState> = MutableStateFlow(LoginViewState())
 
-    override val uiState: StateFlow<AuthState> = _uiState
+    override val uiState: StateFlow<LoginViewState> = _uiState
 
     override suspend fun login(login: String, password: String) {
-        _uiState.value = AuthState.Loading
+        _uiState.value.loading = true
 
-        useCase.login(login, password).fold(
-            {
-                when(it) {
-                    is NetworkError.ServerError -> { AuthState.ServerError }
-                    is NetworkError.AuthenticationError -> { AuthState.AuthenticationError(it.message) }
-                    is NetworkError.ValidationError -> { AuthState.ValidationError(it.fields) }
-                }
-            },
-            {
-                AuthState.SignupSuccessful
+        useCase.login(login, password).also { authState ->
+            when(authState) {
+                is AuthState.SignupSuccessful -> {}
+                is AuthState.ServerError -> {}
+                is AuthState.AuthenticationError -> {}
+                is AuthState.EmailValidationError -> {}
+                is AuthState.PasswordValidationError -> {}
             }
-        ).also { _uiState.value = it }
+        }
     }
 }

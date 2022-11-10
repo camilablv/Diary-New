@@ -27,11 +27,15 @@ import com.pchpsky.core.presentation.components.textfield.OutlinedTextField
 import com.pchpsky.core.presentation.theme.DiaryTheme
 import com.pchpsky.core.presentation.theme.green
 import kotlinx.coroutines.launch
+import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("CoroutineCreationDuringComposition", "UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalComposeUiApi
 @Composable
-fun LoginScreen(viewModel: LoginViewModel) {
+fun LoginScreen(
+    viewModel: LoginViewModel = koinViewModel(),
+    navigateToHome: () -> Unit
+) {
 
     val login = viewModel.login
     val password = viewModel.password

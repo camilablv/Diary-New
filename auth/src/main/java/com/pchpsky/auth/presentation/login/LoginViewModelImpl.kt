@@ -10,7 +10,7 @@ import com.pchpsky.network.errors.NetworkError
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class LoginViewModelImpl(val useCase: LoginUseCase) : ViewModel(), LoginViewModel {
+class LoginViewModelImpl(private val useCase: LoginUseCase) : ViewModel(), LoginViewModel {
 
     private val _uiState: MutableStateFlow<LoginViewState> = MutableStateFlow(LoginViewState())
     override val uiState: StateFlow<LoginViewState> = _uiState

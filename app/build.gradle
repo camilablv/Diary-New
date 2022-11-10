@@ -60,6 +60,7 @@ dependencies {
     implementation project(path: ':records')
 
     implementation project(path: ':core')
+    implementation project(path: ':auth')
 
     //Jetpack Compose
     implementation 'androidx.activity:activity-compose:1.6.1'

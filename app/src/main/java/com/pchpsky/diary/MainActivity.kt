@@ -1,5 +1,6 @@
 package com.pchpsky.diary
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -10,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.pchpsky.auth.presentation.AuthActivity
 import com.pchpsky.core.presentation.theme.DiaryTheme
 import com.pchpsky.record.presentation.insulin.RecordInsulinScreen
 
@@ -23,22 +25,19 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = DiaryTheme.colors.background
                 ) {
-                    RecordInsulinScreen() {}
+                    val intent = Intent(this, AuthActivity::class.java)
+                    startActivity(intent)
                 }
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
+
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     DiaryTheme {
-        Greeting("Android")
     }
 }

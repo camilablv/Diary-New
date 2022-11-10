@@ -2,10 +2,11 @@ package com.pchpsky.auth.presentation.login
 
 
 data class LoginViewState(
-    var email: String = "",
+    var login: String = "",
     var password: String = "",
     var loading: Boolean = false,
-    var sighIn: Boolean = false,
+    var sighInSuccessful: Boolean = false,
     var emailError: String = "",
     var passwordError: String = "",
+    var authError: String = ""
 )

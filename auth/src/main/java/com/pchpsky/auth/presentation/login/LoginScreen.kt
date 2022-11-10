@@ -34,14 +34,14 @@ import kotlinx.coroutines.launch
 @Composable
 fun LoginScreen(viewModel: LoginViewModel) {
 
-    val login = remember { mutableStateOf("") }
-    val password = remember { mutableStateOf("") }
-    val uiState: AuthState by viewModel.uiState.collectAsState()
+    val login = viewModel.login
+    val password = viewModel.password
+    val viewState by viewModel.uiState.collectAsState()
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    if (uiState is AuthState.SignupSuccessful) {
+    if (viewState.sighInSuccessful) {
         val context = LocalContext.current
 //        openHomeScreen(context)
     }
@@ -81,8 +81,8 @@ fun LoginScreen(viewModel: LoginViewModel) {
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
 
-                LoginTextField(login, null)
-                LoginPasswordTextField(password, null)
+                LoginTextField(login, viewState.emailError)
+                LoginPasswordTextField(password, viewState.passwordError)
             }
 
             RoundedFilledButton(
@@ -103,10 +103,10 @@ fun LoginScreen(viewModel: LoginViewModel) {
                 color = green
             )
         }
-        if (uiState is AuthState.AuthenticationError) {
+        if (viewState.authError.isNotEmpty()) {
             scope.launch {
                 scaffoldState.snackbarHostState.showSnackbar(
-                    (uiState as AuthState.AuthenticationError).message,
+                    viewState.authError,
                 )
             }
         }

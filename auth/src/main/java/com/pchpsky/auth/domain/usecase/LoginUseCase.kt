@@ -15,14 +15,7 @@ class LoginUseCase(private val repository: LoginRepository) {
                         AuthState.AuthenticationError(networkError.message)
                     }
                     is NetworkError.ValidationError -> {
-//                        networkError.fields.map {
-//                            when(it.key) {
-//                                "" -> {AuthState.EmailValidationError(it.value)}
-//                                "" -> {AuthState.PasswordValidationError(it.value)}
-//                                else -> {}
-//                            }.also { it }
-//                        }
-                        AuthState.EmailValidationError("")
+                        AuthState.ValidationError(networkError.fields)
                     }
                 }
             },

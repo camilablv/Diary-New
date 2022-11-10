@@ -15,18 +15,27 @@ class LoginViewModelImpl(val useCase: LoginUseCase) : ViewModel(), LoginViewMode
     private val _uiState: MutableStateFlow<LoginViewState> = MutableStateFlow(LoginViewState())
     override val uiState: StateFlow<LoginViewState> = _uiState
 
-    override val login: MutableState<String> = mutableStateOf(_uiState.value.login)
-    override val password: MutableState<String> = mutableStateOf(_uiState.value.password)
+    override val login = mutableStateOf(_uiState.value.login)
+    override val password = mutableStateOf(_uiState.value.password)
 
     override suspend fun login(login: String, password: String) {
         _uiState.value.loading = true
 
         useCase.login(login, password).also { authState ->
             when(authState) {
-                is AuthState.SignupSuccessful -> {}
-                is AuthState.ServerError -> {}
-                is AuthState.AuthenticationError -> {}
-                is AuthState.ValidationError -> {}
+                is AuthState.SignupSuccessful -> { _uiState.value.sighInSuccessful = true }
+                is AuthState.ServerError -> { TODO() }
+                is AuthState.AuthenticationError -> { _uiState.value.authError = authState.message }
+                is AuthState.ValidationError -> { parseValidationError(authState.fields) }
+            }
+        }
+    }
+
+    private fun parseValidationError(fields: Map<String, ArrayList<String>>) {
+        fields.forEach {
+            when(it.key) {
+                "email" -> { _uiState.value.emailError = it.value[0] }
+                "password" -> { _uiState.value.passwordError = it.value[0] }
             }
         }
     }

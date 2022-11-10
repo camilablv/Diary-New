@@ -21,7 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.pchpsky.auth.presentation.AuthState
 import com.pchpsky.core.presentation.components.ErrorMessage
 import com.pchpsky.core.presentation.components.RoundedFilledButton
 import com.pchpsky.core.presentation.components.textfield.OutlinedTextField

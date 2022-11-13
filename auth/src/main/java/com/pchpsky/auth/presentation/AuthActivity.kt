@@ -6,19 +6,17 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.pchpsky.auth.navigation.AuthRoute
 import com.pchpsky.auth.presentation.login.LoginScreen
-import com.pchpsky.auth.presentation.ui.theme.DiaryTheme
+import com.pchpsky.core.presentation.theme.DiaryTheme
 
 class AuthActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,9 +40,7 @@ class AuthActivity : ComponentActivity() {
 fun AuthNavHost(navController: NavHostController) {
     NavHost(navController = navController, startDestination = AuthRoute.LOGIN.route) {
         composable(AuthRoute.LOGIN.route) {
-            LoginScreen {
-
-            }
+            LoginScreen {}
         }
     }
 }

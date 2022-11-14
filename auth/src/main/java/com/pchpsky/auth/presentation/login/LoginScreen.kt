@@ -1,6 +1,7 @@
 package com.pchpsky.auth.presentation.login
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
@@ -45,8 +46,7 @@ fun LoginScreen(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     if (viewState.sighInSuccessful) {
-        val context = LocalContext.current
-//        openHomeScreen(context)
+        navigateToHome()
     }
 
     Scaffold(

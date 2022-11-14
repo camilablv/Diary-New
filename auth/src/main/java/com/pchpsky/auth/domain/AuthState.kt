@@ -1,4 +1,4 @@
-package com.pchpsky.auth.presentation
+package com.pchpsky.auth.domain
 
 sealed class AuthState {
     object SignupSuccessful : AuthState()

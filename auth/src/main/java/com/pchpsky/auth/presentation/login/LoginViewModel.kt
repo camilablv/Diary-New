@@ -1,9 +1,6 @@
 package com.pchpsky.auth.presentation.login
 
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import com.pchpsky.auth.presentation.AuthState
 import kotlinx.coroutines.flow.StateFlow
 
 interface LoginViewModel {

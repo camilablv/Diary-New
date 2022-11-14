@@ -1,34 +1,32 @@
-package com.pchpsky.auth.presentation
+package com.pchpsky.diary.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.pchpsky.auth.navigation.AuthRoute
 import com.pchpsky.auth.presentation.login.LoginScreen
 import com.pchpsky.core.presentation.theme.DiaryTheme
+import com.pchpsky.diary.presentation.navigation.Routes
+import com.pchpsky.record.presentation.insulin.RecordInsulinScreen
 
-class AuthActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             DiaryTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = DiaryTheme.colors.background
                 ) {
-                    AuthNavHost(navController = rememberNavController())
+                    NavHost(navController = rememberNavController())
                 }
             }
         }
@@ -37,17 +35,17 @@ class AuthActivity : ComponentActivity() {
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun AuthNavHost(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = AuthRoute.LOGIN.route) {
-        composable(AuthRoute.LOGIN.route) {
-            LoginScreen {}
+fun NavHost(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = Routes.LOGIN.route) {
+        composable(Routes.LOGIN.route) {
+            LoginScreen {
+//                navController.navigate(Routes.INSULIN.route)
+            }
         }
-    }
-}
+        composable(Routes.INSULIN.route) {
+            RecordInsulinScreen {
 
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    DiaryTheme {
+            }
+        }
     }
 }

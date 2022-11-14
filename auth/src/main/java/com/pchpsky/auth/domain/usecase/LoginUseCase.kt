@@ -1,7 +1,7 @@
 package com.pchpsky.auth.domain.usecase
 
 import com.pchpsky.auth.domain.repository.LoginRepository
-import com.pchpsky.auth.presentation.AuthState
+import com.pchpsky.auth.domain.AuthState
 import com.pchpsky.network.errors.NetworkError
 
 class LoginUseCase(private val repository: LoginRepository) {

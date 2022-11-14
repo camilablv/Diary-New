@@ -1,12 +1,9 @@
 package com.pchpsky.auth.presentation.login
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.pchpsky.auth.presentation.AuthState
+import com.pchpsky.auth.domain.AuthState
 import com.pchpsky.auth.domain.usecase.LoginUseCase
-import com.pchpsky.network.errors.NetworkError
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
@@ -23,9 +20,13 @@ class LoginViewModelImpl(private val useCase: LoginUseCase) : ViewModel(), Login
 
         useCase.login(login, password).also { authState ->
             when(authState) {
-                is AuthState.SignupSuccessful -> { _uiState.value.sighInSuccessful = true }
+                is AuthState.SignupSuccessful -> {
+                    _uiState.value = _uiState.value.copy(sighInSuccessful = true)
+                }
                 is AuthState.ServerError -> { TODO() }
-                is AuthState.AuthenticationError -> { _uiState.value.authError = authState.message }
+                is AuthState.AuthenticationError -> {
+                    _uiState.value = _uiState.value.copy(authError = authState.message)
+                }
                 is AuthState.ValidationError -> { parseValidationError(authState.fields) }
             }
         }

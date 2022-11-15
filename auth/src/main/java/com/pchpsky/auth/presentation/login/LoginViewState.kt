@@ -6,7 +6,7 @@ data class LoginViewState(
     var password: String = "",
     var loading: Boolean = false,
     var sighInSuccessful: Boolean = false,
-    var emailError: String = "",
-    var passwordError: String = "",
+    var emailError: String? = null,
+    var passwordError: String? = null,
     var authError: String = ""
 )

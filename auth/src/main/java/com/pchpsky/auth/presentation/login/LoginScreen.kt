@@ -1,7 +1,6 @@
 package com.pchpsky.auth.presentation.login
 
 import android.annotation.SuppressLint
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Scaffold
@@ -11,7 +10,6 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -28,13 +26,13 @@ import com.pchpsky.core.presentation.components.textfield.OutlinedTextField
 import com.pchpsky.core.presentation.theme.DiaryTheme
 import com.pchpsky.core.presentation.theme.green
 import kotlinx.coroutines.launch
-import org.koin.androidx.compose.getViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @SuppressLint("CoroutineCreationDuringComposition", "UnusedMaterialScaffoldPaddingParameter")
 @ExperimentalComposeUiApi
 @Composable
 fun LoginScreen(
-    viewModel: LoginViewModelImpl = getViewModel(),
+    viewModel: LoginViewModelImpl = koinViewModel(),
     navigateToHome: () -> Unit
 ) {
 
@@ -81,7 +79,6 @@ fun LoginScreen(
                         end.linkTo(parent.end, 40.dp)
                         width = Dimension.fillToConstraints
                     },
-                verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
 
                 LoginTextField(login, viewState.emailError)
@@ -146,6 +143,6 @@ fun LoginPasswordTextField(password: MutableState<String>, errorMessage: String?
 @Preview
 fun LoginPreview() {
     DiaryTheme(darkTheme = true) {
-        LoginScreen() {}
+        LoginScreen {}
     }
 }

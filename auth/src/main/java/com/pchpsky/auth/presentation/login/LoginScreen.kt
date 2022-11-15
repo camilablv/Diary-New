@@ -3,10 +3,7 @@ package com.pchpsky.auth.presentation.login
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Scaffold
-import androidx.compose.material.SnackbarHost
-import androidx.compose.material.Text
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -42,9 +39,7 @@ fun LoginScreen(
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
     val keyboardController = LocalSoftwareKeyboardController.current
-    val loginButtonEnabled = remember {
-        mutableStateOf(false)
-    }
+    val loginButtonEnabled = remember { mutableStateOf(false) }
 
     if (viewState.sighInSuccessful) {
         navigateToHome()
@@ -59,8 +54,8 @@ fun LoginScreen(
         ConstraintLayout(
             modifier = Modifier
                 .fillMaxSize()
-                .background(DiaryTheme.colors.background)
                 .imePadding()
+                .background(DiaryTheme.colors.background)
                 .semantics { contentDescription = "Login screen" }
         ) {
             val (column, button, signInTitle) = createRefs()

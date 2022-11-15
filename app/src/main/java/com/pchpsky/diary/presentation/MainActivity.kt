@@ -3,15 +3,13 @@ package com.pchpsky.diary.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.insets.ProvideWindowInsets
 import com.pchpsky.auth.presentation.login.LoginScreen
 import com.pchpsky.core.presentation.theme.DiaryTheme
 import com.pchpsky.diary.presentation.navigation.Routes
@@ -22,10 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             DiaryTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = DiaryTheme.colors.background
-                ) {
+                ProvideWindowInsets {
                     NavHost(navController = rememberNavController())
                 }
             }

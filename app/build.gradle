@@ -60,6 +60,8 @@ dependencies {
     implementation project(path: ':records')
 
     implementation project(path: ':core')
+    implementation project(path: ':auth')
+    implementation project(path: ':network')
 
     //Jetpack Compose
     implementation 'androidx.activity:activity-compose:1.6.1'
@@ -89,4 +91,7 @@ dependencies {
     implementation "io.insert-koin:koin-android:$koin_android_version"
     testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
     implementation "io.insert-koin:koin-androidx-compose:$koin_android_compose_version"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-compose:$compose_navigation_version"
 }

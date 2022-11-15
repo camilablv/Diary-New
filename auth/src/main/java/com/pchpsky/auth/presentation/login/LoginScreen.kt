@@ -42,10 +42,15 @@ fun LoginScreen(
     val scope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
     val keyboardController = LocalSoftwareKeyboardController.current
+    val loginButtonEnabled = remember {
+        mutableStateOf(false)
+    }
 
     if (viewState.sighInSuccessful) {
         navigateToHome()
     }
+
+    loginButtonEnabled.value = login.value.isNotEmpty() && password.value.isNotEmpty()
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -100,7 +105,8 @@ fun LoginScreen(
                         viewModel.login(login.value, password.value)
                     }
                 },
-                color = green
+                color = green,
+                enabled = loginButtonEnabled.value
             )
         }
         if (viewState.authError.isNotEmpty()) {

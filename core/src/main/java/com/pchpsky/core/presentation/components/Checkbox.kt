@@ -1,8 +1,6 @@
 package com.pchpsky.core.presentation.components
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.Text
@@ -10,19 +8,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.Green
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.Color.Companion.Yellow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pchpsky.core.presentation.theme.DiaryTheme
 
 data class Value(val text: String, val color: Color)
 
 @Composable
-fun Checkbox(
-    values: List<Value>,
+fun <T> Checkbox(
+    value: T,
     modifier: Modifier,
-    select: (Value) -> Unit
+    selectedColor: Color,
+    text: String,
+    select: (T) -> Unit
 ) {
-    values.forEach {
+    Column {
         Row(
             modifier = modifier
         ) {
@@ -31,23 +35,44 @@ fun Checkbox(
                 modifier = Modifier
                     .size(30.dp),
                 onClick = {
-                    select(it)
+                    select(value)
                 },
                 enabled = true,
                 colors = RadioButtonDefaults.colors(
-                    selectedColor = it.color,
-                    unselectedColor = Color.White
+                    selectedColor = selectedColor,
+                    unselectedColor = White
                 )
 
             )
 
             Text(
-                text = it.text,
+                text = text,
                 modifier = Modifier
                     .padding(start = 25.dp)
                     .align(Alignment.CenterVertically),
                 style = DiaryTheme.typography.body
             )
+        }
+    }
+}
+
+
+@Composable
+@Preview
+fun CheckboxPreview() {
+    val values = listOf(
+        Value("red", Red),
+        Value("orange", Yellow),
+        Value("green", Green)
+    )
+
+    DiaryTheme {
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+
         }
     }
 }

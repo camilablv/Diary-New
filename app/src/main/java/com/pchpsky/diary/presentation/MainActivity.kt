@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun NavHost(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = Routes.LOGIN.route) {
+    NavHost(navController = navController, startDestination = Routes.INSULIN.route) {
         composable(Routes.LOGIN.route) {
             LoginScreen {
 //                navController.navigate(Routes.INSULIN.route)

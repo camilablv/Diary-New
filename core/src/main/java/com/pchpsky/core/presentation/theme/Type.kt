@@ -28,7 +28,8 @@ val typography = DiaryTypography(
     body = TextStyle(
         fontSize = 14.sp,
         fontWeight = FontWeight.Normal,
-        fontFamily = FontFamily.SansSerif
+        fontFamily = FontFamily.SansSerif,
+        color = Color.White
     ),
     textField = TextStyle(
         fontSize = 16.sp,

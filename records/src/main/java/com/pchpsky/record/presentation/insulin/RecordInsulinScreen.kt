@@ -10,14 +10,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pchpsky.core.presentation.components.Calendar
-import com.pchpsky.core.presentation.components.Counter
-import com.pchpsky.core.presentation.components.Date
-import com.pchpsky.core.presentation.components.Clock
+import com.pchpsky.core.presentation.components.*
 import com.pchpsky.core.presentation.theme.DiaryTheme
+import com.pchpsky.core.utils.extentions.colorFromHex
 import org.koin.androidx.compose.getViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -80,6 +79,20 @@ fun RecordInsulinScreen(
                         time = viewState.time,
                         circleRadius = 150f,
                         outerCircleThickness = 50f
+                    )
+                }
+            }
+
+            item {
+                viewState.insulins.forEach {
+                    Checkbox(
+                        value = it,
+                        modifier = Modifier,
+                        selectedColor = Color.Green,
+                        text = it.name,
+                        select = {
+
+                        }
                     )
                 }
             }

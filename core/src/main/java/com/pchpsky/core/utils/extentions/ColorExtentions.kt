@@ -8,6 +8,6 @@ fun Color.toHex(): String {
     return "#" + Integer.toHexString(toArgb()).drop(2)
 }
 
-fun colorFromHex(hexColor: String): Color {
-    return Color(parseColor("#$hexColor"))
+fun fromHex(hexColor: String): Color {
+    return Color(parseColor(hexColor))
 }

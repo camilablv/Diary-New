@@ -10,13 +10,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pchpsky.core.presentation.components.*
 import com.pchpsky.core.presentation.theme.DiaryTheme
-import com.pchpsky.core.utils.extentions.colorFromHex
+import com.pchpsky.core.utils.extentions.fromHex
 import org.koin.androidx.compose.getViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -87,7 +86,7 @@ fun RecordInsulinScreen(
                         modifier = Modifier
                             .padding(start = 0.dp),
                         selected = viewState.selectedInsulin == insulin,
-                        selectedColor = Color.Green,
+                        selectedColor = fromHex(insulin.color),
                         text = insulin.name,
                         select = {
                             viewModel.selectInsulin(it)

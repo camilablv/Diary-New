@@ -23,6 +23,7 @@ data class Value(val text: String, val color: Color)
 fun <T> Checkbox(
     value: T,
     modifier: Modifier,
+    selected: Boolean,
     selectedColor: Color,
     text: String,
     select: (T) -> Unit
@@ -34,7 +35,7 @@ fun <T> Checkbox(
                 .clickable { select(value) }
         ) {
             RadioButton(
-                selected = true,
+                selected = selected,
                 modifier = Modifier
                     .size(38.dp),
                 onClick = {

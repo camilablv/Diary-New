@@ -32,9 +32,7 @@ fun RecordInsulinScreen(
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
-    val units = remember {
-        mutableStateOf(viewState.units.toString())
-    }
+    val units = remember { mutableStateOf(viewState.units.toString()) }
 
     LaunchedEffect(true) {
         viewModel.insulins()
@@ -83,15 +81,16 @@ fun RecordInsulinScreen(
             }
 
             item {
-                viewState.insulins.forEach {
+                viewState.insulins.forEach { insulin ->
                     Checkbox(
-                        value = it,
+                        value = insulin,
                         modifier = Modifier
                             .padding(start = 0.dp),
+                        selected = viewState.selectedInsulin == insulin,
                         selectedColor = Color.Green,
-                        text = it.name,
+                        text = insulin.name,
                         select = {
-
+                            viewModel.selectInsulin(it)
                         }
                     )
                 }

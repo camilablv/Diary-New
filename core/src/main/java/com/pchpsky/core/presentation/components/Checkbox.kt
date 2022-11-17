@@ -1,5 +1,6 @@
 package com.pchpsky.core.presentation.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.RadioButton
 import androidx.compose.material.RadioButtonDefaults
@@ -29,11 +30,13 @@ fun <T> Checkbox(
     Column {
         Row(
             modifier = modifier
+                .fillMaxSize()
+                .clickable { select(value) }
         ) {
             RadioButton(
                 selected = true,
                 modifier = Modifier
-                    .size(30.dp),
+                    .size(38.dp),
                 onClick = {
                     select(value)
                 },
@@ -50,7 +53,7 @@ fun <T> Checkbox(
                 modifier = Modifier
                     .padding(start = 25.dp)
                     .align(Alignment.CenterVertically),
-                style = DiaryTheme.typography.body
+                style = DiaryTheme.typography.checkbox
             )
         }
     }
@@ -60,12 +63,6 @@ fun <T> Checkbox(
 @Composable
 @Preview
 fun CheckboxPreview() {
-    val values = listOf(
-        Value("red", Red),
-        Value("orange", Yellow),
-        Value("green", Green)
-    )
-
     DiaryTheme {
         Box(
             modifier = Modifier

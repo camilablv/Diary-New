@@ -50,10 +50,10 @@ fun RecordInsulinScreen(
                 .fillMaxSize()
         )
         LazyColumn(
-            modifier = Modifier
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier,
+            verticalArrangement = Arrangement.spacedBy(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp)
         ) {
             item {
                 Counter(
@@ -66,8 +66,7 @@ fun RecordInsulinScreen(
             item {
                 Row(
                     modifier = Modifier
-                        .wrapContentSize()
-                        .padding(32.dp),
+                        .wrapContentSize(),
                     horizontalArrangement = Arrangement.SpaceEvenly
                 ) {
                     Calendar(
@@ -87,7 +86,8 @@ fun RecordInsulinScreen(
                 viewState.insulins.forEach {
                     Checkbox(
                         value = it,
-                        modifier = Modifier,
+                        modifier = Modifier
+                            .padding(start = 0.dp),
                         selectedColor = Color.Green,
                         text = it.name,
                         select = {

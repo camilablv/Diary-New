@@ -1,6 +1,7 @@
 package com.pchpsky.core.presentation.components
 
 import android.view.WindowInsetsAnimation
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -33,7 +34,7 @@ fun Counter(
     ) {
         Box(
             modifier = Modifier
-                .border(1.dp, DiaryTheme.colors.divider, DiaryTheme.shapes.roundedTextField)
+                .background(DiaryTheme.colors.surface, DiaryTheme.shapes.roundedTextField)
         ) {
             CounterTextField(units = value, setUnits = onValueChanged)
 

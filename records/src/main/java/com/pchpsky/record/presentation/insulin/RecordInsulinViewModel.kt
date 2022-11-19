@@ -16,4 +16,5 @@ interface RecordInsulinViewModel {
     fun selectTime(localTime: String)
     fun selectDate(localDate: String)
     fun addNote(note: String)
+    fun noteTextExpanded(value: Boolean)
 }

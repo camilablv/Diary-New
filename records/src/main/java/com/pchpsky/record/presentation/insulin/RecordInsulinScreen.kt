@@ -2,14 +2,19 @@ package com.pchpsky.record.presentation.insulin
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusProperties
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,6 +37,7 @@ fun RecordInsulinScreen(
     val scope = rememberCoroutineScope()
 
     val units = remember { mutableStateOf(viewState.units.toString()) }
+    val noteText = remember { mutableStateOf("") }
 
     LaunchedEffect(true) {
         viewModel.insulins()
@@ -73,8 +79,8 @@ fun RecordInsulinScreen(
                     Clock(
                         modifier = Modifier,
                         time = viewState.time,
-                        circleRadius = 150f,
-                        outerCircleThickness = 50f
+                        circleRadius = 175f,
+                        outerCircleThickness = 25f
                     )
                 }
             }
@@ -93,6 +99,26 @@ fun RecordInsulinScreen(
                         }
                     )
                 }
+            }
+
+            item {
+                Notes(
+                    value = noteText,
+                    modifier = Modifier
+                        .imePadding()
+                        .clickable {
+
+                        }
+                        .onFocusChanged {
+                            viewModel.noteTextExpanded(it.isFocused)
+                        },
+                    expanded = viewState.noteTextExpanded,
+                    placeholder = {
+                        Text(text = "Type note..")
+                    },
+                    expandedMaxLines = 10,
+                    collapsedMaxLines = 5
+                )
             }
         }
     }

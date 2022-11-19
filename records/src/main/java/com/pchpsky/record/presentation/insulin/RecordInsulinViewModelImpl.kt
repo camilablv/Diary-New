@@ -1,6 +1,7 @@
 package com.pchpsky.record.presentation.insulin
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import com.pchpsky.core.domain.model.Insulin
 import com.pchpsky.record.domain.usecase.RecordInsulinUseCase
@@ -13,6 +14,10 @@ class RecordInsulinViewModelImpl(
 ) : ViewModel(), RecordInsulinViewModel {
     private var _uiState = MutableStateFlow(RecordInsulinViewState())
     override val uiState: StateFlow<RecordInsulinViewState> = _uiState
+
+//    override var noteTextFieldExpanded: Boolean
+//        get() = _uiState.value.noteTextExpanded
+//        set(value) { _uiState.value = _uiState.value.copy(noteTextExpanded = value) }
 
     override fun incrementUnits() {
         val units = _uiState.value.units
@@ -74,5 +79,9 @@ class RecordInsulinViewModelImpl(
 
     override fun addNote(note: String) {
         _uiState.value = _uiState.value.copy(note = note)
+    }
+
+    override fun noteTextExpanded(value: Boolean) {
+        _uiState.value = _uiState.value.copy(noteTextExpanded = value)
     }
 }

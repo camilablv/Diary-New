@@ -1,5 +1,7 @@
 package com.pchpsky.core.presentation.components
 
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -46,7 +48,8 @@ fun Notes(
             .fillMaxWidth()
             .clickable {
 
-            },
+            }
+            .animateContentSize(),
         textStyle = DiaryTheme.typography.checkbox,
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Done,
@@ -69,8 +72,6 @@ fun Notes(
             ),
             placeholder = placeholder
         )
-
-
     }
 }
 

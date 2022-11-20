@@ -12,9 +12,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.FocusProperties
-import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -80,7 +79,7 @@ fun RecordInsulinScreen(
                         modifier = Modifier,
                         time = viewState.time,
                         circleRadius = 175f,
-                        outerCircleThickness = 25f
+                        outerCircleThickness = 24f
                     )
                 }
             }
@@ -110,11 +109,12 @@ fun RecordInsulinScreen(
 
                         }
                         .onFocusChanged {
-                            viewModel.noteTextExpanded(it.isFocused)
+                            viewModel.noteTextFialdExpanded(it.hasFocus)
                         },
-                    expanded = viewState.noteTextExpanded,
+                    expanded = viewState.noteTextFieldExpanded,
+                    onDoneAction = { focusManager.clearFocus() },
                     placeholder = {
-                        Text(text = "Type note..")
+                        Text(text = "Type note..", color = Color.White)
                     },
                     expandedMaxLines = 10,
                     collapsedMaxLines = 5

@@ -1,7 +1,6 @@
 package com.pchpsky.record.presentation.insulin
 
 import android.util.Log
-import androidx.compose.runtime.MutableState
 import androidx.lifecycle.ViewModel
 import com.pchpsky.core.domain.model.Insulin
 import com.pchpsky.record.domain.usecase.RecordInsulinUseCase
@@ -81,7 +80,7 @@ class RecordInsulinViewModelImpl(
         _uiState.value = _uiState.value.copy(note = note)
     }
 
-    override fun noteTextExpanded(value: Boolean) {
-        _uiState.value = _uiState.value.copy(noteTextExpanded = value)
+    override fun noteTextFialdExpanded(value: Boolean) {
+        _uiState.value = _uiState.value.copy(noteTextFieldExpanded = value)
     }
 }

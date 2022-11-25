@@ -1,6 +1,5 @@
 package com.pchpsky.core.presentation.components
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
@@ -46,11 +46,11 @@ fun Notes(
         modifier = modifier
             .background(DiaryTheme.colors.surface, DiaryTheme.shapes.roundedTextField)
             .fillMaxWidth()
-            .clickable {
+            .clickable() {
 
             }
             .animateContentSize(),
-        textStyle = DiaryTheme.typography.checkbox,
+        textStyle = if (expanded) DiaryTheme.typography.basicTextField else DiaryTheme.typography.notes,
         keyboardOptions = KeyboardOptions(
             imeAction = ImeAction.Done,
             keyboardType = KeyboardType.Text

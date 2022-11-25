@@ -1,6 +1,8 @@
 package com.pchpsky.record.presentation.insulin
 
 import android.util.Log
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.pchpsky.core.domain.model.Insulin
 import com.pchpsky.record.domain.usecase.RecordInsulinUseCase
@@ -14,9 +16,7 @@ class RecordInsulinViewModelImpl(
     private var _uiState = MutableStateFlow(RecordInsulinViewState())
     override val uiState: StateFlow<RecordInsulinViewState> = _uiState
 
-//    override var noteTextFieldExpanded: Boolean
-//        get() = _uiState.value.noteTextExpanded
-//        set(value) { _uiState.value = _uiState.value.copy(noteTextExpanded = value) }
+    val noteText = mutableStateOf("Once we have the width of our text field boundaries and we know how to calculate the width of our text, it’s not that complicated to find desired font size. We are going to compare those two values, and we will continue to decrease our default font size and recalculate our instrinsics, until our text width becomes smaller than the text field’s width.")
 
     override fun incrementUnits() {
         val units = _uiState.value.units

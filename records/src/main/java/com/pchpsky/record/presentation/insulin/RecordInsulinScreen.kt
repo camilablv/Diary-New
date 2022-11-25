@@ -36,7 +36,6 @@ fun RecordInsulinScreen(
     val scope = rememberCoroutineScope()
 
     val units = remember { mutableStateOf(viewState.units.toString()) }
-    val noteText = remember { mutableStateOf("") }
 
     LaunchedEffect(true) {
         viewModel.insulins()
@@ -52,7 +51,8 @@ fun RecordInsulinScreen(
                 .fillMaxSize()
         )
         LazyColumn(
-            modifier = Modifier,
+            modifier = Modifier
+                .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp)
@@ -102,7 +102,7 @@ fun RecordInsulinScreen(
 
             item {
                 Notes(
-                    value = noteText,
+                    value = viewModel.noteText,
                     modifier = Modifier
                         .imePadding()
                         .clickable {

@@ -3,6 +3,7 @@ package com.pchpsky.record.presentation.insulin
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
@@ -34,6 +35,7 @@ fun RecordInsulinScreen(
     val focusManager = LocalFocusManager.current
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+    val interactionSource = remember { MutableInteractionSource() }
 
     val units = remember { mutableStateOf(viewState.units.toString()) }
 
@@ -52,7 +54,8 @@ fun RecordInsulinScreen(
         )
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .clickable(interactionSource = interactionSource, indication = null) { focusManager.clearFocus() },
             verticalArrangement = Arrangement.spacedBy(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp)

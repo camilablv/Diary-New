@@ -46,9 +46,7 @@ fun Notes(
         modifier = modifier
             .background(DiaryTheme.colors.surface, DiaryTheme.shapes.roundedTextField)
             .fillMaxWidth()
-            .clickable() {
-
-            }
+            .clickable {}
             .animateContentSize(),
         textStyle = if (expanded) DiaryTheme.typography.basicTextField else DiaryTheme.typography.notes,
         keyboardOptions = KeyboardOptions(

@@ -23,9 +23,8 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.pchpsky.core.domain.model.Date
 import com.pchpsky.core.presentation.theme.*
-
-data class Date(val dayOfMonth: String, val month: String)
 
 @Composable
 fun Calendar(

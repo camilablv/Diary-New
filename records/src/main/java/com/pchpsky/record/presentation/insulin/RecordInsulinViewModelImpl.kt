@@ -73,7 +73,7 @@ class RecordInsulinViewModelImpl(
     }
 
     override fun selectDate(localDate: String) {
-        _uiState.value = _uiState.value.copy(date = localDate)
+        _uiState.value = _uiState.value.copy(date = TODO())
     }
 
     override fun addNote(note: String) {

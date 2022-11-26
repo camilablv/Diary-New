@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -72,16 +73,16 @@ fun RecordInsulinScreen(
                 Row(
                     modifier = Modifier
                         .wrapContentSize(),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Calendar(
                         modifier = Modifier,
-                        date = Date("08", "Nov"),
+                        date = viewState.date,
                         size = 128.dp)
                     Clock(
                         modifier = Modifier,
                         time = viewState.time,
-                        circleRadius = 175f,
+                        circleRadius = LocalDensity.current.run { 64.dp.toPx() },
                         outerCircleThickness = 24f
                     )
                 }

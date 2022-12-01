@@ -23,11 +23,8 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.pchpsky.core.presentation.theme.DiaryTheme
-import com.pchpsky.core.presentation.theme.green
-import com.pchpsky.core.presentation.theme.lightGreen
-
-data class Date(val dayOfMonth: String, val month: String)
+import com.pchpsky.core.domain.model.Date
+import com.pchpsky.core.presentation.theme.*
 
 @Composable
 fun Calendar(
@@ -44,8 +41,8 @@ fun Calendar(
             drawRoundRect(
                 brush = Brush.linearGradient(
                     listOf(
-                        Color.Gray,
-                        Color.Gray.copy(0.40f)
+                        Color(0xff616161),
+                        darkGrey
                     )
                 ),
                 cornerRadius = CornerRadius(sizeInPx/48, sizeInPx/48),

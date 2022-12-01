@@ -1,6 +1,10 @@
 package com.pchpsky.record.presentation.insulin
 
+import com.pchpsky.core.domain.model.Date
 import com.pchpsky.core.domain.model.Insulin
+import com.pchpsky.core.utils.extentions.currentDay
+import com.pchpsky.core.utils.extentions.currentMonth
+import com.pchpsky.core.utils.extentions.currentTime
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -13,8 +17,9 @@ data class RecordInsulinViewState(
     val showInsulinMenu: Boolean = false,
     val showTimePicker: Boolean = false,
     val showDatePicker: Boolean = false,
-    val time: String = LocalTime.now().format(DateTimeFormatter.ofPattern("hh:mm")),
-    val date: String = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMM")),
+    val time: String = currentTime(),
+    val date: Date = Date(currentDay(), currentMonth()),
     val note: String = "",
+    val noteTextFieldExpanded: Boolean = false,
     val loading: Boolean = false
 )

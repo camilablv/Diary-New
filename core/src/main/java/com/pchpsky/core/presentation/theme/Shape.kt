@@ -10,7 +10,7 @@ import androidx.compose.ui.unit.dp
 val shapes = DiaryShapes(
     roundedButton = RoundedCornerShape(50),
     roundedCard = AbsoluteRoundedCornerShape(8.dp),
-    roundedTextField = RoundedCornerShape(8),
+    roundedTextField = RoundedCornerShape(8.dp),
     navigationDrawer = CutCornerShape(0.dp),
     snackbar = AbsoluteRoundedCornerShape(4.dp)
 )

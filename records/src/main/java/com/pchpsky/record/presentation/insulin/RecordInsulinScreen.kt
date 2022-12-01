@@ -2,22 +2,26 @@ package com.pchpsky.record.presentation.insulin
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.pchpsky.core.presentation.components.Calendar
-import com.pchpsky.core.presentation.components.Counter
-import com.pchpsky.core.presentation.components.Date
-import com.pchpsky.core.presentation.components.Clock
+import com.pchpsky.core.presentation.components.*
 import com.pchpsky.core.presentation.theme.DiaryTheme
+import com.pchpsky.core.utils.extentions.fromHex
 import org.koin.androidx.compose.getViewModel
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -32,10 +36,9 @@ fun RecordInsulinScreen(
     val focusManager = LocalFocusManager.current
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+    val interactionSource = remember { MutableInteractionSource() }
 
-    val units = remember {
-        mutableStateOf(viewState.units.toString())
-    }
+    val units = remember { mutableStateOf(viewState.units.toString()) }
 
     LaunchedEffect(true) {
         viewModel.insulins()
@@ -52,9 +55,11 @@ fun RecordInsulinScreen(
         )
         LazyColumn(
             modifier = Modifier
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .fillMaxSize()
+                .clickable(interactionSource = interactionSource, indication = null) { focusManager.clearFocus() },
+            verticalArrangement = Arrangement.spacedBy(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp)
         ) {
             item {
                 Counter(
@@ -67,21 +72,57 @@ fun RecordInsulinScreen(
             item {
                 Row(
                     modifier = Modifier
-                        .wrapContentSize()
-                        .padding(32.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
+                        .wrapContentSize(),
+                    horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Calendar(
                         modifier = Modifier,
-                        date = Date("08", "Nov"),
+                        date = viewState.date,
                         size = 128.dp)
                     Clock(
                         modifier = Modifier,
                         time = viewState.time,
-                        circleRadius = 150f,
-                        outerCircleThickness = 50f
+                        circleRadius = LocalDensity.current.run { 64.dp.toPx() },
+                        outerCircleThickness = 24f
                     )
                 }
+            }
+
+            item {
+                viewState.insulins.forEach { insulin ->
+                    Checkbox(
+                        value = insulin,
+                        modifier = Modifier
+                            .padding(start = 0.dp),
+                        selected = viewState.selectedInsulin == insulin,
+                        selectedColor = fromHex(insulin.color),
+                        text = insulin.name,
+                        select = {
+                            viewModel.selectInsulin(it)
+                        }
+                    )
+                }
+            }
+
+            item {
+                Notes(
+                    value = viewModel.noteText,
+                    modifier = Modifier
+                        .imePadding()
+                        .clickable {
+
+                        }
+                        .onFocusChanged {
+                            viewModel.noteTextFialdExpanded(it.hasFocus)
+                        },
+                    expanded = viewState.noteTextFieldExpanded,
+                    onDoneAction = { focusManager.clearFocus() },
+                    placeholder = {
+                        Text(text = "Type note..", color = Color.White)
+                    },
+                    expandedMaxLines = 10,
+                    collapsedMaxLines = 5
+                )
             }
         }
     }

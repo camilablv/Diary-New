@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.pchpsky.core.presentation.theme.DiaryTheme
+import com.pchpsky.core.presentation.theme.darkGrey
 import com.pchpsky.core.presentation.theme.pink
 import kotlin.math.PI
 import kotlin.math.cos
@@ -53,7 +54,7 @@ fun Clock(
                 brush = Brush.linearGradient(
                     listOf(
                         pink,
-                        pink.copy(0.55f)
+                        Color(0xFF6a1b9a)
                     )
                 ),
                 radius = circleRadius + outerCircleThickness/2f,
@@ -63,8 +64,8 @@ fun Clock(
             drawCircle(
                 brush = Brush.linearGradient(
                     listOf(
-                        Color(0xFFF3F3F3).copy(0.45f),
-                        Color(0xFF3F3F3F).copy(0.25f)
+                        Color(0xff616161),
+                        darkGrey
                     )
                 ),
                 radius = circleRadius,

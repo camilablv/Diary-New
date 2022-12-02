@@ -64,7 +64,9 @@ fun RecordInsulinScreen(
             item {
                 Counter(
                     modifier = Modifier,
-                    value = units,
+                    value = viewState.units,
+                    increment = viewModel::incrementUnits,
+                    decrement = viewModel::decrementUnits,
                     onValueChanged = { viewModel.setUnits(it.toDouble()) }
                 )
             }

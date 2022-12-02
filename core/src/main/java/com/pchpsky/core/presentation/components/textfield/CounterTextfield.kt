@@ -27,16 +27,16 @@ import com.pchpsky.core.presentation.theme.DiaryTheme
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CounterTextField(
-    units: MutableState<String>,
+    value: MutableState<String>,
     setUnits: (String) -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
     BasicTextField(
-        value = units.value,
+        value = value.value,
         onValueChange = { string ->
-            units.value = string
+            value.value = string
         },
         textStyle = DiaryTheme.typography.insulinUnits,
         modifier = Modifier
@@ -44,7 +44,7 @@ fun CounterTextField(
             .height(IntrinsicSize.Min)
             .padding(horizontal = 10.dp)
             .onFocusChanged {
-                if (!it.isCaptured) setUnits(units.value)
+                if (!it.isCaptured) setUnits(value.value)
             },
 
         decorationBox = {
@@ -56,7 +56,7 @@ fun CounterTextField(
         ),
         keyboardActions = KeyboardActions(
             onDone = {
-                setUnits(units.value)
+                setUnits(value.value)
                 keyboardController?.hide()
                 focusManager.clearFocus()
             }
@@ -80,6 +80,6 @@ fun CounterTextFieldPreview() {
             mutableStateOf("1.0")
         }
 
-        CounterTextField(units = units, setUnits = {})
+        CounterTextField(value = units, setUnits = {})
     }
 }

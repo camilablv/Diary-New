@@ -9,9 +9,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AddCircle
 import androidx.compose.material.icons.rounded.RemoveCircle
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import com.pchpsky.core.presentation.components.textfield.CounterTextField
 import com.pchpsky.core.presentation.theme.DiaryTheme
 
-@OptIn(ExperimentalAnimationApi::class)
 @SuppressLint("UnrememberedMutableState")
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun Counter(
     modifier: Modifier,
@@ -30,7 +28,7 @@ fun Counter(
     decrement: () -> Unit,
     onValueChanged: (String) -> Unit
 ) {
-    val initialValueState = value
+    val previousValueState = remember { mutableStateOf(value) }
 
     Row(
         modifier = modifier
@@ -44,12 +42,12 @@ fun Counter(
             AnimatedContent(
                 targetState = value,
                 transitionSpec = {
-                    if (value > initialValueState) {
-                        slideInVertically { fullHeight -> fullHeight } + fadeIn() with
-                        slideOutVertically { fullHeight -> -fullHeight } + fadeOut()
-                    } else {
+                    if (value > previousValueState.value) {
                         slideInVertically { fullHeight -> -fullHeight } + fadeIn() with
                         slideOutVertically { fullHeight -> fullHeight } + fadeOut()
+                    } else {
+                        slideInVertically { fullHeight -> fullHeight } + fadeIn() with
+                        slideOutVertically { fullHeight -> -fullHeight } + fadeOut()
                     }.using(SizeTransform(clip = true))
                 }
             ) {
@@ -62,7 +60,10 @@ fun Counter(
                 .align(Alignment.CenterVertically),
         ) {
             IconButton(
-                onClick = { increment() }
+                onClick = {
+                    previousValueState.value = value
+                    increment()
+                }
             ) {
                 Icon(
                     imageVector = Icons.Rounded.AddCircle,
@@ -73,7 +74,10 @@ fun Counter(
             }
 
             IconButton(
-                onClick = { decrement() }
+                onClick = {
+                    previousValueState.value = value
+                    decrement()
+                }
             ) {
                 Icon(
                     imageVector = Icons.Rounded.RemoveCircle,
@@ -89,9 +93,6 @@ fun Counter(
 @Composable
 @Preview
 fun CounterPreview() {
-    val units = remember {
-        mutableStateOf("1.0")
-    }
     DiaryTheme {
         Box(
             modifier = Modifier

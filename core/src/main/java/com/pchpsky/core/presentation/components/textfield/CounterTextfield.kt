@@ -1,5 +1,6 @@
 package com.pchpsky.core.presentation.components.textfield
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -10,7 +11,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
@@ -72,14 +72,11 @@ fun CounterTextField(
     )
 }
 
+@SuppressLint("UnrememberedMutableState")
 @Composable
 @Preview
 fun CounterTextFieldPreview() {
     DiaryTheme {
-        val units = remember {
-            mutableStateOf("1.0")
-        }
-
-        CounterTextField(value = units, setUnits = {})
+        CounterTextField(value = mutableStateOf("1.0"), setUnits = {})
     }
 }

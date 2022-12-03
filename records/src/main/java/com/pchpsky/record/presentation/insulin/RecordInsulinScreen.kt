@@ -56,7 +56,10 @@ fun RecordInsulinScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .clickable(interactionSource = interactionSource, indication = null) { focusManager.clearFocus() },
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null
+                ) { focusManager.clearFocus() },
             verticalArrangement = Arrangement.spacedBy(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp)

@@ -59,15 +59,15 @@ class RecordInsulinViewModelImpl(
         _uiState.value = _uiState.value.copy(showInsulinMenu = false, selectedInsulin = insulin)
     }
 
-    override fun showInsulinMenu(show: Boolean) {
+    override fun insulinMenu(show: Boolean) {
         _uiState.value = _uiState.value.copy(showInsulinMenu = show)
     }
 
-    override fun showTimePicker(show: Boolean) {
+    override fun timePicker(show: Boolean) {
         _uiState.value = _uiState.value.copy(showTimePicker = show)
     }
 
-    override fun showDatePicker(show: Boolean) {
+    override fun datePicker(show: Boolean) {
         _uiState.value = _uiState.value.copy(showDatePicker = show)
     }
 

@@ -12,7 +12,8 @@ val shapes = DiaryShapes(
     roundedCard = AbsoluteRoundedCornerShape(8.dp),
     roundedTextField = RoundedCornerShape(8.dp),
     navigationDrawer = CutCornerShape(0.dp),
-    snackbar = AbsoluteRoundedCornerShape(4.dp)
+    snackbar = AbsoluteRoundedCornerShape(4.dp),
+    circle = RoundedCornerShape(50)
 )
 
 data class DiaryShapes(
@@ -20,11 +21,12 @@ data class DiaryShapes(
     val roundedCard: Shape,
     val roundedTextField: Shape,
     val navigationDrawer: Shape,
-    val snackbar: Shape
+    val snackbar: Shape,
+    val circle: Shape
 )
 
 
 
 val LocalDiaryShapes = staticCompositionLocalOf<DiaryShapes> {
-    error("No Diary Shape Provided")
+    error("No Diary Shapes Provided")
 }

@@ -1,5 +1,6 @@
 package com.pchpsky.core.presentation.components.textfield
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -10,7 +11,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
@@ -27,16 +27,16 @@ import com.pchpsky.core.presentation.theme.DiaryTheme
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CounterTextField(
-    units: MutableState<String>,
+    value: MutableState<String>,
     setUnits: (String) -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     val focusManager = LocalFocusManager.current
 
     BasicTextField(
-        value = units.value,
+        value = value.value,
         onValueChange = { string ->
-            units.value = string
+            value.value = string
         },
         textStyle = DiaryTheme.typography.insulinUnits,
         modifier = Modifier
@@ -44,7 +44,7 @@ fun CounterTextField(
             .height(IntrinsicSize.Min)
             .padding(horizontal = 10.dp)
             .onFocusChanged {
-                if (!it.isCaptured) setUnits(units.value)
+                if (!it.isCaptured) setUnits(value.value)
             },
 
         decorationBox = {
@@ -56,7 +56,7 @@ fun CounterTextField(
         ),
         keyboardActions = KeyboardActions(
             onDone = {
-                setUnits(units.value)
+                setUnits(value.value)
                 keyboardController?.hide()
                 focusManager.clearFocus()
             }
@@ -72,14 +72,11 @@ fun CounterTextField(
     )
 }
 
+@SuppressLint("UnrememberedMutableState")
 @Composable
 @Preview
 fun CounterTextFieldPreview() {
     DiaryTheme {
-        val units = remember {
-            mutableStateOf("1.0")
-        }
-
-        CounterTextField(units = units, setUnits = {})
+        CounterTextField(value = mutableStateOf("1.0"), setUnits = {})
     }
 }

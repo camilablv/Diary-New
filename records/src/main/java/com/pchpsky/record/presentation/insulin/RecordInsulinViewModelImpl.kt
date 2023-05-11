@@ -16,7 +16,12 @@ class RecordInsulinViewModelImpl(
     private var _uiState = MutableStateFlow(RecordInsulinViewState())
     override val uiState: StateFlow<RecordInsulinViewState> = _uiState
 
-    val noteText = mutableStateOf("Once we have the width of our text field boundaries and we know how to calculate the width of our text, it’s not that complicated to find desired font size. We are going to compare those two values, and we will continue to decrease our default font size and recalculate our instrinsics, until our text width becomes smaller than the text field’s width.")
+    val noteText = mutableStateOf("Once we have the width" +
+            " of our text field boundaries and we know how to calculate the width of our " +
+            "text, it’s not that complicated to find desired font size. We are going to compare " +
+            "those two values, and we will continue to decrease our default font size and" +
+            " recalculate our instrinsics, until our text width becomes smaller than the text" +
+            " field’s width.")
 
     override fun incrementUnits() {
         val units = _uiState.value.units
@@ -31,9 +36,7 @@ class RecordInsulinViewModelImpl(
     }
 
     override fun setUnits(units: Double) {
-        if (units == null) _uiState.value =
-            _uiState.value.copy(unitsInputError = "Units value is invalid")
-        else if (units < 1.0 || units > 100.0) return
+        if (units < 1.0 || units > 100.0) return
         else _uiState.value = _uiState.value.copy(units = units, unitsInputError = "")
     }
 
@@ -56,15 +59,15 @@ class RecordInsulinViewModelImpl(
         _uiState.value = _uiState.value.copy(showInsulinMenu = false, selectedInsulin = insulin)
     }
 
-    override fun showInsulinMenu(show: Boolean) {
+    override fun insulinMenu(show: Boolean) {
         _uiState.value = _uiState.value.copy(showInsulinMenu = show)
     }
 
-    override fun showTimePicker(show: Boolean) {
+    override fun timePicker(show: Boolean) {
         _uiState.value = _uiState.value.copy(showTimePicker = show)
     }
 
-    override fun showDatePicker(show: Boolean) {
+    override fun datePicker(show: Boolean) {
         _uiState.value = _uiState.value.copy(showDatePicker = show)
     }
 

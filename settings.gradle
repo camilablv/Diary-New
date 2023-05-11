@@ -14,4 +14,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Diary"
 include ':app'
-include ':Record'
+include ':records'
+include ':core'
+include ':network'
+include ':schema'
+include ':auth'

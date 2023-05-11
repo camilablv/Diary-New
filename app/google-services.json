@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "867441814749",
+    "project_id": "diary-assistent---new",
+    "storage_bucket": "diary-assistent---new.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:867441814749:android:ec82fb9da757c38e7abf34",
+        "android_client_info": {
+          "package_name": "com.pchpsky.diary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "867441814749-d6o0fe0e8h3d1fde7hogjook6nergbvv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAc5O2dCh9KOxojHa2xPadGae9zjTsJPgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "867441814749-d6o0fe0e8h3d1fde7hogjook6nergbvv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

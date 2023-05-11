@@ -3,6 +3,7 @@ package com.pchpsky.core.presentation.components
 import android.graphics.Paint
 import android.graphics.Typeface
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -97,12 +98,12 @@ fun CalendarPreview() {
     DiaryTheme {
         Box(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .background(DiaryTheme.colors.background),
         ) {
             Calendar(
                 modifier = Modifier
-                    .align(Alignment.Center)
-                    .padding(16.dp),
+                    .align(Alignment.BottomStart),
                 date = date,
                 size = 250.dp
             )

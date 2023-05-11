@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -40,78 +41,75 @@ fun Clock(
         mutableStateOf(Offset.Zero)
     }
 
-    Box(modifier = Modifier) {
-        Canvas(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White)
-        ) {
-            val width = size.width
-            val height = size.height
-            circleCenter.value = Offset(x = width/2f, y = height/2f)
-            drawCircle(
-                style = Stroke(width = outerCircleThickness),
-                brush = Brush.linearGradient(
-                    listOf(
-                        pink,
-                        Color(0xFF6a1b9a)
-                    )
-                ),
-                radius = circleRadius + outerCircleThickness/2f,
-                center = circleCenter.value
+    Canvas(
+        modifier = modifier
+            .background(Color.Green)
+    ) {
+        val width = size.width
+        val height = size.height
+        circleCenter.value = Offset(x = width, y = height)
+        drawCircle(
+            style = Stroke(width = outerCircleThickness),
+            brush = Brush.linearGradient(
+                listOf(
+                    pink,
+                    Color(0xFF6a1b9a)
+                )
+            ),
+            radius = circleRadius + outerCircleThickness/2f,
+            center = circleCenter.value
+        )
+
+        drawCircle(
+            brush = Brush.linearGradient(
+                listOf(
+                    Color(0xff616161),
+                    darkGrey
+                )
+            ),
+            radius = circleRadius,
+            center = circleCenter.value
+        )
+
+        val lineLength = circleRadius * 0.10f
+
+        for (i in 0 until 12) {
+            val angleInDegrees = i * 360f / 12
+            val angleInRadius = angleInDegrees * PI/180f + PI/2f
+
+            val start = Offset(
+                x = (circleRadius * cos(angleInRadius) + circleCenter.value.x).toFloat(),
+                y = (circleRadius * sin(angleInRadius) + circleCenter.value.y).toFloat()
             )
 
-            drawCircle(
-                brush = Brush.linearGradient(
-                    listOf(
-                        Color(0xff616161),
-                        darkGrey
-                    )
-                ),
-                radius = circleRadius,
-                center = circleCenter.value
+            val end = Offset(
+                x = (circleRadius * cos(angleInRadius) + circleCenter.value.x).toFloat(),
+                y = (circleRadius * sin(angleInRadius) + lineLength + circleCenter.value.y).toFloat()
             )
 
-            val lineLength = circleRadius * 0.10f
-
-            for (i in 0 until 12) {
-                val angleInDegrees = i * 360f / 12
-                val angleInRadius = angleInDegrees * PI/180f + PI/2f
-
-                val start = Offset(
-                    x = (circleRadius * cos(angleInRadius) + circleCenter.value.x).toFloat(),
-                    y = (circleRadius * sin(angleInRadius) + circleCenter.value.y).toFloat()
+            rotate(
+                angleInDegrees + 180,
+                pivot = start
+            ) {
+                drawLine(
+                    color = Color.Gray,
+                    start = start,
+                    end = end,
+                    strokeWidth = 12f,
+                    cap = StrokeCap.Round
                 )
-
-                val end = Offset(
-                    x = (circleRadius * cos(angleInRadius) + circleCenter.value.x).toFloat(),
-                    y = (circleRadius * sin(angleInRadius) + lineLength + circleCenter.value.y).toFloat()
-                )
-
-                rotate(
-                    angleInDegrees + 180,
-                    pivot = start
-                ) {
-                    drawLine(
-                        color = Color.Gray,
-                        start = start,
-                        end = end,
-                        strokeWidth = 12f,
-                        cap = StrokeCap.Round
-                    )
-                }
             }
+        }
 
-            val paint = Paint().apply {
-                textAlign = Paint.Align.CENTER
-                textSize = circleRadius / 1.6f
-                color = 0xff00000f.toInt()
-                typeface = Typeface.DEFAULT_BOLD
-            }
+        val paint = Paint().apply {
+            textAlign = Paint.Align.CENTER
+            textSize = circleRadius / 1.6f
+            color = 0xff00000f.toInt()
+            typeface = Typeface.DEFAULT_BOLD
+        }
 
-            drawIntoCanvas {
-                it.nativeCanvas.drawText(time, circleCenter.value.x, circleCenter.value.y + 48f, paint)
-            }
+        drawIntoCanvas {
+            it.nativeCanvas.drawText(time, circleCenter.value.x, circleCenter.value.y + 48f, paint)
         }
     }
 }
@@ -122,12 +120,13 @@ fun ClockPreview() {
     DiaryTheme {
         Box(
             modifier = Modifier
-                .fillMaxSize(),
+                .fillMaxSize()
+                .background(Color.Red),
             contentAlignment = Alignment.Center
         ) {
             Clock(
                 modifier = Modifier
-                    .size(500.dp),
+                    .align(Alignment.Center),
                 time = "16:15",
                 circleRadius = 400f,
                 outerCircleThickness = 50f

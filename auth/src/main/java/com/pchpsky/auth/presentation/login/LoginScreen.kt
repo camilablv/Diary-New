@@ -62,7 +62,7 @@ fun LoginScreen(
 
             Text(
                 text = "Sign In",
-                style = DiaryTheme.typography.authScreenHeader,
+                style = DiaryTheme.typography.header,
                 modifier = Modifier.constrainAs(signInTitle) {
                     top.linkTo(parent.top, 40.dp)
                     start.linkTo(parent.start, 40.dp)

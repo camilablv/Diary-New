@@ -1,6 +1,5 @@
 package com.pchpsky.core.presentation.theme
 
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -18,7 +17,7 @@ val typography = DiaryTypography(
         fontWeight = FontWeight.W300,
         fontFamily = FontFamily.SansSerif
     ),
-    authScreenHeader = TextStyle(
+    header = TextStyle(
         fontSize = 40.sp,
         fontWeight = FontWeight.W300,
         fontFamily = FontFamily.SansSerif
@@ -80,13 +79,18 @@ val typography = DiaryTypography(
             colors = listOf(Color.White, Color.Transparent),
             startY = 0.2f,
         )
+    ),
+    time = TextStyle(
+        fontSize = 48.sp,
+        fontWeight = FontWeight.Bold,
+        fontFamily = FontFamily.SansSerif,
+        textAlign = TextAlign.Center
     )
-
 )
 
 data class DiaryTypography(
     val logo: TextStyle,
-    val authScreenHeader: TextStyle,
+    val header: TextStyle,
     val primaryHeader: TextStyle,
     val body: TextStyle,
     val textField: TextStyle,
@@ -95,7 +99,8 @@ data class DiaryTypography(
     val snackbar: TextStyle,
     val pickers: TextStyle,
     val checkbox: TextStyle,
-    val notes: TextStyle
+    val notes: TextStyle,
+    val time: TextStyle
 )
 
 val LocalDiaryTypography = staticCompositionLocalOf<DiaryTypography> {

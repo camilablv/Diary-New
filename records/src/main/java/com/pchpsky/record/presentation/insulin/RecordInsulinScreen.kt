@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -15,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,9 +42,9 @@ fun RecordInsulinScreen(
 
     val units = remember { mutableStateOf(viewState.units.toString()) }
 
-    LaunchedEffect(true) {
-        viewModel.insulins()
-    }
+//    LaunchedEffect(true) {
+//        viewModel.insulins()
+//    }
 
     Scaffold(
         modifier = Modifier
@@ -60,7 +62,7 @@ fun RecordInsulinScreen(
                     interactionSource = interactionSource,
                     indication = null
                 ) { focusManager.clearFocus() },
-            verticalArrangement = Arrangement.spacedBy(24.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
             contentPadding = PaddingValues(horizontal = 24.dp, vertical = 16.dp)
         ) {
@@ -77,19 +79,29 @@ fun RecordInsulinScreen(
             item {
                 Row(
                     modifier = Modifier
-                        .wrapContentSize(),
+                        .fillMaxWidth()
+                        .wrapContentHeight()
+                        .background(Color.White),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Calendar(
-                        modifier = Modifier,
+                        modifier = Modifier
+                            .align(Alignment.CenterVertically),
                         date = viewState.date,
                         size = 128.dp)
-                    Clock(
-                        modifier = Modifier,
-                        time = viewState.time,
-                        circleRadius = LocalDensity.current.run { 64.dp.toPx() },
-                        outerCircleThickness = 24f
-                    )
+                    Card_(
+                        modifier = Modifier
+                            .size(180.dp),
+                        shape = DiaryTheme.shapes.circle,
+                        onClick = { /*TODO*/ }
+                    ) {
+                        TimeText(
+                            time = viewState.time,
+                            modifier = Modifier
+                                .background(Color.Red)
+                                .align(Alignment.CenterVertically)
+                        )
+                    }
                 }
             }
 
@@ -97,8 +109,7 @@ fun RecordInsulinScreen(
                 viewState.insulins.forEach { insulin ->
                     Checkbox(
                         value = insulin,
-                        modifier = Modifier
-                            .padding(start = 0.dp),
+                        modifier = Modifier,
                         selected = viewState.selectedInsulin == insulin,
                         selectedColor = fromHex(insulin.color),
                         text = insulin.name,
